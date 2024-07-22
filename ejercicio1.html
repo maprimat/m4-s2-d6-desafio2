@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    // Escríbe aquí tu código
+    // VARIABLES
+    var contactForm = document.getElementById('formulario');
+
+    var nameForm = document.getElementById("nombre");
+    var subjectForm = document.getElementById("asunto");
+    var messageForm = document.getElementById("mensaje");
+
+    var resultMessage = document.querySelector(".resultado");
+
+    var nameError = document.querySelector(".errorNombre")
+    var subjectError = document.querySelector(".errorAsunto")
+    var messageError = document.querySelector(".errorMensaje")
+
+    // 1.1 Función para validar inputs con un regex
+    function validation(name, subject, message){
+
+        var expression = /[a-zA-Z]\w+/i;
+        var validationFlag = true;
+
+        // Validaciones
+        if(name == "" || !expression.test(name) ){
+            nameError.innerHTML = 'El nombre es obligatorio y no debe contener números';
+            validationFlag = false;
+        }if(subject == "" || !expression.test(subject) ){
+            subjectError.innerHTML = 'El asunto es obligatorio y no debe contener números';
+            validationFlag = false;
+        }if(message == "" || !expression.test(message) ){
+            messageError.innerHTML = 'El mensaje es obligatorio y no debe contener números';
+            validationFlag = false;
+        }
+        return validationFlag;
+    };
+
+    // 1.2 Función para limpiar mensajes (error y éxito)
+    function clearMessages(){
+        resultMessage.innerHTML = '';
+        nameError.innerHTML = '';
+        subjectError.innerHTML = '';
+        messageError.innerHTML = '';
+    };
+
+    // 1.3 Función para mostrar mensaje de envío exitoso
+    function success() {
+        resultMessage.innerHTML = '¡El mensaje ha sido enviado exitosamente!';
+    };
+
+    // 1.4 Función para limpiar el formulario
+    function clearForm() {
+        contactForm.reset();
+    };
+
+    // 1.5 Event Listener para el evento Submit
+    contactForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        // Limpiar Mensajes
+        clearMessages();
+
+        //Manejamos el resultado de la validación
+        if(validation(nameForm.value, subjectForm.value, messageForm.value)){
+            // Si pasamos la validación
+            success();
+            clearForm();
+        }
+
+
+    });
+    </script>
+</body>
+
+</html>

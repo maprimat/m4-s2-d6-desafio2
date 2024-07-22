@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h2>
+                Resultado: <span class="resultado"></span>
+            </h2>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Valor 1</label>
+                        <input id="valor1" type="text">
+                    </div>
+                    <div>
+                        <label for="">Valor 2</label>
+                        <input id="valor2" type="text">
+                    </div>
+                    <div style="display: flex">
+                        <button id="btn-sumar" type="button">
+                            Sumar
+                        </button>
+                        <button id="btn-restar" type="button">
+                            Restar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Escríbe aquí tu código
+    // VARIABLES
+
+    var resultado = document.querySelector('.resultado');
+    var valor1 = document.getElementById('valor1');
+    var valor2 = document.getElementById('valor2');
+    var btnSumar = document.getElementById('btn-sumar');
+    var btnRestar = document.getElementById('btn-restar');
+
+    // 1.1 Funcion para limpiar el resultado
+    function limpiarResultado() {
+        resultado.innerHTML = "";
+    }
+
+    // 1.2 Función para insertar resultado en el DOM
+    function mostrarResultado(result){
+        // Validar si el resultado es menor a 0
+        if(result<0){
+            result = 0;
+        }
+        resultado.innerHTML = result;
+    }
+
+    // 1.3 Lógica para el botón Sumar
+    btnSumar.addEventListener('click', function(){
+        // Cuando el usuario sume, limpiamos el resultado
+        limpiarResultado();
+        // Validar que los datos ingresados sean números
+        if(isNaN(valor1.value) || isNaN(valor2.value)){
+            alert('Debes ingresar solo números.');
+        }else{
+            var operacion = Number(valor1.value) + Number(valor2.value);
+            mostrarResultado(operacion);
+        }
+    })
+
+    // 1.4 Lógica para el botón Restar
+    btnRestar.addEventListener('click', function(){
+        // Cuando el usuario reste, limpiamos el resultado
+        limpiarResultado();
+        // Validar que los datos ingresados sean números
+        if(isNaN(valor1.value) || isNaN(valor2.value)){
+            alert('Debes ingresar solo números.');
+        }else{
+            var operacion = Number(valor1.value) - Number(valor2.value);
+            mostrarResultado(operacion);
+        }
+    })
+    </script>
+</body>
+
+</html>
